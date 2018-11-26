@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>osu! beatmap pack</title>
+    <style>
+      :root {
+        --color1: #444444;
+      }
+      #copy {
+        color: var(--color1);
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 25px;
+        padding: 7px 14px;
+        cursor: pointer;
+        user-select: none;
+      }
+      #copy:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      #copy:active {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+        margin-top: 1em;
+        list-style-type: none;
+      }
+      input {
+        outline: none;
+        line-height: normal;
+        border-radius: 25px;
+        border: solid 1px rgba(0, 0, 0, 0.1);
+        padding: 7px 14px;
+      }
+      input:hover {
+        border-color: rgba(0, 0, 0, 0.15);
+      }
+      a {
+        margin-right: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        color: var(--color1);
+      }
+      span.link {
+        white-space: nowrap;
+        color: var(--color1);
+        cursor: default;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+      }
+      div#list {
+        padding: 0 22%;
+        margin: 2em 0 0 0;
+        text-align: center;
+      }
+      input.error {
+        border-color: deeppink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="list">
+      <input placeholder="regex" />
+      <!-- <input class="search" placeholder="Search" /> -->
+      <span id="copy">copy</span>
+      <ul class="list">
+        <!-- li -->
+
+        <!--
+          <li><a href="1222" class="link" target="_blank">ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsaf</a> <span class="link">2018 by bilabila</span></li>
+          <li><a href="222" class="link" target="_blank">beddddddddddddddddddasddsaf</a> <span class="link">2018 by bilabila</span></li>
+        -->
+      </ul>
+    </div>
+    <!-- <script src="list.min.js"></script> -->
+    <script>
+      // https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+      const copy = text => {
+        if (!navigator.clipboard) {
+          // sync
+          const textArea = document.createElement('textarea')
+          textArea.value = text
+          document.body.appendChild(textArea)
+          textArea.focus()
+          textArea.select()
+          document.execCommand('copy')
+          document.body.removeChild(textArea)
+        }
+        // chrome 66 async
+        else navigator.clipboard.writeText(text)
+      }
+      const li = document.querySelectorAll('li')
+      const a = [...document.querySelectorAll('li > a')].map(i => i.textContent)
+      const input = document.querySelector('input')
+      // const a = new List('list', {
+      //   valueNames: ['link']
+      // })
+      input.addEventListener('keyup', e => {
+        if (e.keyCode !== 13) return
+        let r
+        try {
+          r = new RegExp(input.value)
+          input.classList.remove('error')
+        } catch (e) {
+          input.classList.add('error')
+          return
+        }
+        for (let i = 0; i < li.length; ++i) {
+          if (r.test(a[i])) {
+            li[i].style.display = 'flex'
+          } else {
+            li[i].style.display = 'none'
+          }
+        }
+      })
+      input.addEventListener('blur', () => input.focus())
+      document.querySelector('#copy').addEventListener('click', () => {
+        let t = ''
+        for (let i = 0; i < li.length; ++i) if (li[i].style.display !== 'none') t += li[i].firstElementChild.href + '\n'
+        copy(t)
+      })
+    </script>
+  </body>
+</html>
