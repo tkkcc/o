@@ -3,13 +3,13 @@ const got = require('got')
 const ProgressBar = require('progress')
 const { JSDOM } = require('jsdom')
 const result = []
-
+const all = []
 // https://github.com/rxaviers/async-pool
 const asyncPool = async (poolLimit, array, iteratorFn) => {
   const bar = new ProgressBar('[:bar] :percent  :elapseds / :etas', {
     total: array.length,
     renderThrottle: 1000,
-    clear: true,
+    clear: true
   })
   const ret = []
   const executing = []
@@ -26,21 +26,20 @@ const asyncPool = async (poolLimit, array, iteratorFn) => {
   return Promise.all(ret)
 }
 
-const get = async ({ type, page }) => {
-  let a
+const get = async ({ type, page, retry = 0 }) => {
   try {
-    a = await got(`https://osu.ppy.sh/beatmaps/packs?type=${type}&page=${page}`)
+    let a = await got(`https://osu.ppy.sh/beatmaps/packs?type=${type}&page=${page}`)
+    a = [...new JSDOM(a.body).window.document.querySelectorAll('div[data-pack-id]')]
+    a = a.map(i => ({
+      id: i.getAttribute('data-pack-id'),
+      title: i.querySelector('.beatmap-pack__name').textContent,
+      date: i.querySelector('.beatmap-pack__date').textContent,
+      author: i.querySelector('.beatmap-pack__author--bold').textContent
+    }))
+    result.push(...a)
   } catch (e) {
-    return
+    if (retry < 5) all.push({ type, page, retry: retry + 1 })
   }
-  a = [...new JSDOM(a.body).window.document.querySelectorAll('div[data-pack-id]')]
-  a = a.map(i => ({
-    id: i.getAttribute('data-pack-id'),
-    title: i.querySelector('.beatmap-pack__name').textContent,
-    date: i.querySelector('.beatmap-pack__date').textContent,
-    author: i.querySelector('.beatmap-pack__author--bold').textContent
-  }))
-  result.push(...a)
 }
 
 const range = (a, b = a + 1) => [...Array(b - a).keys()].map(i => i + a)
@@ -62,8 +61,10 @@ const m = async () => {
       type: i.type,
       page
     }))
-    await asyncPool(4, a, get)
+    all.push(...a)
   }
+  await asyncPool(4, all, get)
+  console.log(all)
   fs.writeFileSync('3.json', JSON.stringify(result))
 }
 m()

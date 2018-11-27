@@ -16,6 +16,7 @@
         padding: 7px 14px;
         cursor: pointer;
         user-select: none;
+        margin-left: 1em;
       }
       #copy:hover {
         background-color: rgba(0, 0, 0, 0.1);
@@ -40,6 +41,7 @@
         border-color: rgba(0, 0, 0, 0.15);
       }
       a {
+        /* user-select: none; */
         margin-right: 1em;
         white-space: nowrap;
         overflow: hidden;
@@ -56,7 +58,7 @@
         display: flex;
         justify-content: space-between;
       }
-      div#list {
+      #list {
         padding: 0 22%;
         margin: 2em 0 0 0;
         text-align: center;
@@ -64,20 +66,148 @@
       input.error {
         border-color: deeppink;
       }
+      #help {
+        padding: 0 1em 1em 1em;
+        color: rgba(0, 0, 0, 0.3);
+        top: 0;
+        right: 0;
+        position: absolute;
+        margin-top: 2em;
+        margin-right: 2em;
+        text-align: right;
+        user-select: none;
+        cursor: default;
+      }
+      #help:hover {
+        color: var(--color1);
+      }
+      #help > div {
+        user-select: text;
+        margin-right: -1em;
+        /* padding: 1em; */
+        /* white-space: pre-wrap; */
+        color: var(--color1);
+        display: none;
+        /* display: grid;
+        grid-template-columns: 1fr 1fr; */
+        /* background-color: white; */
+      }
+      #help:hover > div {
+        margin-top: 0.5em;
+        padding: 1em;
+        background-color: #f8f8f8;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      span.head {
+        text-transform: uppercase;
+        color: black;
+        padding: 0.5em 0 0.1em 0;
+        text-align: center;
+      }
+      span.line {
+        text-align: left;
+        grid-column: 1/-1;
+        white-space: pre;
+      }
+      span.message {
+        color: rgba(0, 0, 0, 0.35);
+        animation: hide 4s forwards;
+        animation-iteration-count: 1;
+        animation-delay: 1s;
+        position: fixed;
+        opacity: 0;
+        right: 1em;
+        bottom: 1em;
+      }
+      @keyframes hide {
+        0% {
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
+    <span class="message"> update on 2018-01-12 </span>
+    <span id="help"
+      >help
+      <div id="helps">
+        <span>100-199:</span> <span>1\d\d</span> <span>400-449:</span> <span>4[0-4][0-9]</span> <span>(osu!):</span> <span>\(osu!\)</span> <span>loved standard:</span> <span>love.*!\)</span>
+        <span>Reol:</span> <span>reol</span> <br />
+        <span class="line">left click copy => osu.ppy.sh</span> <span class="line">right click copy => mediafire.com</span>
+      </div>
+    </span>
     <div id="list">
-      <input placeholder="regex" />
-      <!-- <input class="search" placeholder="Search" /> -->
-      <span id="copy">copy</span>
-      <ul class="list">
-        <!-- li -->
-
-        <!--
-          <li><a href="1222" class="link" target="_blank">ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsaf</a> <span class="link">2018 by bilabila</span></li>
-          <li><a href="222" class="link" target="_blank">beddddddddddddddddddasddsaf</a> <span class="link">2018 by bilabila</span></li>
-        -->
+      <input placeholder="regex" /><span id="copy">copy</span>
+      <ul><li data-item='[449987,504396,645726,665235,783394,798842,822892,825409,828564,834946,846636,851013,851867,852387,865577,874602,874948]'><a href="https://www.mediafire.com/?6yupw2uuec0peb5" class="link" target="_blank">Beatmap Pack #708</a>
+        <span class='link'>2018-11-23 by Stefan</span></li><li data-item='[4422,436177,626406,720294,727142,756533,760694,764683,795001,810006,823960,835078,838060,852400,854728,860963,874091]'><a href="https://www.mediafire.com/?ga4and9s0f6p39w" class="link" target="_blank">Beatmap Pack #707</a>
+        <span class='link'>2018-11-23 by Stefan</span></li><li data-item='[31692,725292,725387,740672,753356,791845,798954,801483,804339,825760,828940,835194,836894,848068,868045,869519,874835]'><a href="https://www.mediafire.com/?u3b8aqcnt1d6if8" class="link" target="_blank">Beatmap Pack #706</a>
+        <span class='link'>2018-11-23 by Stefan</span></li><li data-item='[847776,847996,848003,848259,848837,851543]'><a href="https://assets.ppy.sh/beatmap-packs/MappersGuildCulprate.zip" class="link" target="_blank">Mappers' Guild Pack IV</a>
+        <span class='link'>2018-11-20 by the Mappers' Guild</span></li><li data-item='[260777,728110,733753,759524,762282,777597,785650,816580,817516,829400,837749,845441,848977,849022,850663,853469,855677]'><a href="http://www.mediafire.com/?a74t7a17ppyh5ha" class="link" target="_blank">Beatmap Pack #705</a>
+        <span class='link'>2018-11-17 by Stefan</span></li><li data-item='[317749,738265,788262,794585,802454,824132,824981,829145,829940,834738,836883,842440,847812,851543,852785,859370,866938]'><a href="http://www.mediafire.com/?ch806lclfc443y1" class="link" target="_blank">Beatmap Pack #704</a>
+        <span class='link'>2018-11-17 by Stefan</span></li><li data-item='[666253,722463,781033,812205,821808,830051,834834,845416,846301,847755,851543,856144,860261,865497,868679,869801,871946]'><a href="http://www.mediafire.com/?m0b6eu5bophgfb8" class="link" target="_blank">Beatmap Pack #703</a>
+        <span class='link'>2018-11-17 by Stefan</span></li><li data-item='[473491,678365,687680,714018,742966,743046,759539,763494,811216,812433,817980,832971,835011,840676,841545,844298,852126,858182,859880,864941]'><a href="http://www.mediafire.com/?ln747nmn7gl9zwl" class="link" target="_blank">Taiko Beatmap Pack #46</a>
+        <span class='link'>2018-11-11 by Stefan</span></li><li data-item='[697523,741004,745213,754086,763403,765430,770379,776165,793797,798348,799816,804330,818008,821700,832564,837953,842341,843961,846995,858363]'><a href="http://www.mediafire.com/?b3jil5nn8nt1gjk" class="link" target="_blank">Taiko Beatmap Pack #45</a>
+        <span class='link'>2018-11-11 by Stefan</span></li><li data-item='[587426,682326,692368,732190,737661,762660,769302,779916,796944,804634,812991,816152,823710,824975,831411,832905,836943,839482,841314,843576]'><a href="http://www.mediafire.com/?wupf18g6xzsd5mb" class="link" target="_blank">Taiko Beatmap Pack #44</a>
+        <span class='link'>2018-11-11 by Stefan</span></li><li data-item='[449183,720558,749323,778187,798677,802056,805618,806105,809992,836453,839248,845716,853045,860514,861819,863472,865746]'><a href="http://www.mediafire.com/?3auvy2zjwyj8vzl" class="link" target="_blank">Beatmap Pack #702</a>
+        <span class='link'>2018-11-10 by Stefan</span></li><li data-item='[431924,786665,789095,793724,811195,813969,819243,822696,840161,842562,844658,847900,854508,855479,858938,860649,866432]'><a href="http://www.mediafire.com/?zvpgl1svy3mplb5" class="link" target="_blank">Beatmap Pack #701</a>
+        <span class='link'>2018-11-10 by Stefan</span></li><li data-item='[397764,722873,762635,767109,800205,815868,818551,831385,837433,845765,849141,853519,859181,861289,862156,863999,868211]'><a href="https://www.mediafire.com/?ubux31dz297xblq" class="link" target="_blank">Beatmap Pack #700</a>
+        <span class='link'>2018-11-10 by Stefan</span></li><li data-item='[513701,626677,626965,639660,659277,682518,690240,690530,696380,713930,715728,718316,728977,791866,796663,801161,804518,809424,810076,810911]'><a href="http://www.mediafire.com/?rgsv91f4v12rr5m" class="link" target="_blank">osu!mania Beatmap Pack #53</a>
+        <span class='link'>2018-11-04 by Stefan</span></li><li data-item='[436217,532917,540432,587266,597113,624059,691273,698840,699203,731196,734972,765056,788120,788366,794264,797108,800663,803488,803902,813725]'><a href="http://www.mediafire.com/?i2ynh2czcikduwn" class="link" target="_blank">osu!mania Beatmap Pack #52</a>
+        <span class='link'>2018-11-04 by Stefan</span></li><li data-item='[539769,544889,554256,567261,576786,699439,715066,755294,773136,775649,797236,801225,808379,825376,826551,828727,842871,847800,860123,867287]'><a href="http://www.mediafire.com/?1863608brxe8hxd" class="link" target="_blank">Catch the Beat Beatmap Pack #18</a>
+        <span class='link'>2018-11-04 by Stefan</span></li><li data-item='[520301,570924,596327,639409,706307,706599,727539,769685,770832,779577,794111,809126,809971,812855,815162,816799,828657,831389,831857,840189]'><a href="http://www.mediafire.com/?jf87blz1cuqoef3" class="link" target="_blank">Catch the Beat Beatmap Pack #17</a>
+        <span class='link'>2018-11-04 by Stefan</span></li><li data-item='[483914,739116,757027,766080,775133,775538,784759,788609,793721,804419,808072,808256,819351,820225,824119,825983,828427,828657,831403,832415]'><a href="http://www.mediafire.com/?55rgqw2a4k656wl" class="link" target="_blank">Taiko Beatmap Pack #43</a>
+        <span class='link'>2018-11-04 by Stefan</span></li><li data-item='[690248,702878,708312,709336,725398,727256,739136,742345,757305,761565,768550,773793,781256,782993,793763,795204,799276,803902,807649,819743]'><a href="http://www.mediafire.com/?ddrobbvh1f8uq7x" class="link" target="_blank">Taiko Beatmap Pack #42</a>
+        <span class='link'>2018-11-04 by Stefan</span></li><li data-item='[173612,217667,321347,438613,462748,477233,502648,512591,585435,586848,596105]'><a href="http://www.mediafire.com/?1ml398t6rr520c1" class="link" target="_blank">Loved Beatmap Pack (osu!mania) #3</a>
+        <span class='link'>2018-11-03 by Stefan</span></li><li data-item='[98271,120515,173316,189457,364712,370678,378212,413183,427801,462888,467385,481570,490411,502648,549370,559156,562250,598905,653961,654135]'><a href="http://www.mediafire.com/?vsmuvwfd1h1tvuw" class="link" target="_blank">Loved Beatmap Pack (osu!taiko) #3</a>
+        <span class='link'>2018-11-03 by Stefan</span></li><li data-item='[249761,256947,258585,364712,376203,387957,397819,400300,460569,481570,502592,502648,538927,549370,567410,585435,586156,598905]'><a href="http://www.mediafire.com/?83dmxju8gbdjcdb" class="link" target="_blank">Loved Beatmap Pack (osu!) #7</a>
+        <span class='link'>2018-11-03 by Stefan</span></li><li data-item='[54267,98271,120515,133440,183132,189457,321460,378212,384402,415772,451850,462888,539221,547637,548907,574560,588018,594960]'><a href="http://www.mediafire.com/?1pn4y3jfriwpl9t" class="link" target="_blank">Loved Beatmap Pack (osu!) #6</a>
+        <span class='link'>2018-11-03 by Stefan</span></li><li data-item='[210566,255287,264977,394834,413183,416857,419963,429222,443014,466254,472639,490411,496096,500870,529749,530986,536872,594828]'><a href="http://www.mediafire.com/?3clenbsfdc1uk6d" class="link" target="_blank">Loved Beatmap Pack (osu!) #5</a>
+        <span class='link'>2018-11-03 by Stefan</span></li><li data-item='[664182,727049,761140,797473,808409,823657,831747,833513,839256,853833,854840,855344,857452,860683,860802,865017,866301]'><a href="https://www.mediafire.com/?77sa0e0o7hkagf5" class="link" target="_blank">Beatmap Pack #699</a>
+        <span class='link'>2018-11-02 by Stefan</span></li><li data-item='[709800,726236,727932,745451,758172,776159,783718,787583,792487,800638,801096,807025,807396,824343,832538,844644,863687]'><a href="https://www.mediafire.com/?rm8wo78u3mrrw19" class="link" target="_blank">Beatmap Pack #698</a>
+        <span class='link'>2018-11-02 by Stefan</span></li><li data-item='[640064,687534,710531,763337,777993,783713,796450,796553,817505,831382,842236,847776,852470,854299,858442,858988,864354]'><a href="https://www.mediafire.com/?jy1jh16j87oj5i1" class="link" target="_blank">Beatmap Pack #697</a>
+        <span class='link'>2018-11-02 by Stefan</span></li><li data-item='[540432,624059,650415,678723,701369,702559,765056,776845,788120,788366,791316]'><a href="http://www.mediafire.com/file/kr5t967rfwfigv1" class="link" target="_blank">Beatmap Spotlights: Summer 2018 (osu!mania)</a>
+        <span class='link'>2018-10-31 by Kurokami</span></li><li data-item='[501962,520301,596327,639409,729321,762958]'><a href="http://www.mediafire.com/file/933hw0ja39v3b0b" class="link" target="_blank">Beatmap Spotlights: Summer 2018 (osu!catch)</a>
+        <span class='link'>2018-10-31 by Kurokami</span></li><li data-item='[345990,438839,445365,646093,666764,708312,712825,733461,736594,738600,739116,739136,767708,792231]'><a href="http://www.mediafire.com/file/76wnns6q7e1ez8a" class="link" target="_blank">Beatmap Spotlights: Summer 2018 (osu!taiko)</a>
+        <span class='link'>2018-10-31 by Kurokami</span></li><li data-item='[585154,671268,745020,767446,776247,777322,782784,785774,790979,793027,793438,800070,813036]'><a href="http://www.mediafire.com/file/n5gkrz2it7ku7fr" class="link" target="_blank">Beatmap Spotlights: Summer 2018 (osu!)</a>
+        <span class='link'>2018-10-31 by Kurokami</span></li><li data-item='[602178,716719,737710,740358,751751,783769,814486,829569,839330,840217,840787,847645,855906,856548,859718,861685,861719]'><a href="http://www.mediafire.com/?bzj09a9asp7rxq6" class="link" target="_blank">Beatmap Pack #696</a>
+        <span class='link'>2018-10-26 by Stefan</span></li><li data-item='[529461,646883,666467,697102,705516,734241,735969,750743,792085,794187,811685,815603,825541,843389,848003,863319]'><a href="https://www.mediafire.com/?072k1rqfz5yr8ad" class="link" target="_blank">Beatmap Pack #695</a>
+        <span class='link'>2018-10-26 by Stefan</span></li><li data-item='[580596,670518,740862,762307,785703,798459,804290,807912,815811,816542,830666,833454,841634,843688,848259,849898,853867]'><a href="https://www.mediafire.com/?sqori3j9eb66mf6" class="link" target="_blank">Beatmap Pack #694</a>
+        <span class='link'>2018-10-20 by Stefan</span></li><li data-item='[383070,735153,760100,782295,785731,811119,814101,818610,821981,826369,842341,847764,847930,848837,849640,855087,859608]'><a href="https://www.mediafire.com/?3k8m8wjsd5z88f1" class="link" target="_blank">Beatmap Pack #693</a>
+        <span class='link'>2018-10-20 by Stefan</span></li><li data-item='[110547,132824,195210,239471,312902,318320,335798,350305,364712,403526,439776,451183,467385,490411,493316,523735,535878,549370,574577,585131]'><a href="http://www.mediafire.com/?9o9na8s9s91c9s1" class="link" target="_blank">Loved Beatmap Pack (osu!mania) #2</a>
+        <span class='link'>2018-10-13 by Stefan</span></li><li data-item='[23210,31297,107979,183132,195210,217667,223370,311029,350305,427801,442876,455989,502648,522215,524515,549370,564670,565247,585435,586156]'><a href="https://www.mediafire.com/?gmhk512435o1hn0" class="link" target="_blank">Loved Beatmap Pack (osu!catch) #2</a>
+        <span class='link'>2018-10-13 by Stefan</span></li><li data-item='[50373,101768,107979,110547,132824,162368,173005,215155,215546,320864,334489,335722,350305,375516,403076,426572,477119,481441,490335,521862]'><a href="http://www.mediafire.com/?0s73w0hh0mjtdlh" class="link" target="_blank">Loved Beatmap Pack (osu!taiko) #2</a>
+        <span class='link'>2018-10-13 by Stefan</span></li><li data-item='[86003,110547,128818,155252,166649,291689,300748,327557,350305,375516,405382,413701,496656,497482,499204,508998,517244,519256,524026,564165]'><a href="http://www.mediafire.com/?13x3eg6odnz8406" class="link" target="_blank">Loved Beatmap Pack (osu!) #4</a>
+        <span class='link'>2018-10-13 by Stefan</span></li><li data-item='[12448,13008,20533,34256,35773,43095,45107,50373,58604,64631,102293,107979,132824,197747,234785,368845,396221,399404,413117,484896]'><a href="http://www.mediafire.com/?27gl22fowf5jd7k" class="link" target="_blank">Loved Beatmap Pack (osu!) #3</a>
+        <span class='link'>2018-10-13 by Stefan</span></li><li data-item='[140735,755619,765801,774119,792819,804631,810200,810953,823589,827594,840260,843984,847116,847126,847996,852771,853036]'><a href="https://www.mediafire.com/?bhmidemmr8iv1d7" class="link" target="_blank">Beatmap Pack #692</a>
+        <span class='link'>2018-10-12 by Stefan</span></li><li data-item='[443879,680338,708045,749150,775016,802789,803535,807090,812160,813551,818826,827156,829414,832836,838383,839251,851564]'><a href="https://www.mediafire.com/?03ul5qt114t0f13" class="link" target="_blank">Beatmap Pack #691</a>
+        <span class='link'>2018-10-12 by Stefan</span></li><li data-item='[633251,682002,745270,762789,785222,786322,801001,805224,814216,816852,826992,827635,831242,841126,845954,848963,850415]'><a href="http://www.mediafire.com/?gur5a2frc83lbub" class="link" target="_blank">Beatmap Pack #690</a>
+        <span class='link'>2018-10-05 by Stefan</span></li><li data-item='[87671,115746,137394,180175,223370,233896,239943,254713,312514,318036,318569,367631,388160,401088,444098,451216,453985,479940,501530,518951]'><a href="http://www.mediafire.com/?worrk56mt5s34yb" class="link" target="_blank">Loved Beatmap Pack (osu!mania) #1</a>
+        <span class='link'>2018-09-30 by Stefan</span></li><li data-item='[20533,91386,137394,178550,215155,244103,290641,301884,304828,319217,345834,367631,374606,374874,406881,423771,445798,490223,524546,527777]'><a href="http://www.mediafire.com/?5y5og82k8o7xbpp" class="link" target="_blank">Loved Beatmap Pack (osu!catch) #1</a>
+        <span class='link'>2018-09-30 by Stefan</span></li><li data-item='[40671,43277,45107,49010,58604,73478,90803,96369,137394,178550,219733,223370,288162,293705,296900,304828,319217,365053,367631,447342]'><a href="http://www.mediafire.com/?1a45v064ul8hq7w" class="link" target="_blank">Loved Beatmap Pack (osu!taiko) #1</a>
+        <span class='link'>2018-09-30 by Stefan</span></li><li data-item='[40671,43277,90803,118768,124311,124997,137394,147910,178550,203309,223370,286145,291155,318036,345834,346104,351629,377921,414448,484896]'><a href="http://www.mediafire.com/?hdfyi4pm2odaixe" class="link" target="_blank">Loved Beatmap Pack (osu!) #2</a>
+        <span class='link'>2018-09-30 by Stefan</span></li><li data-item='[18315,37065,42567,48738,73478,106318,129314,180771,288162,291154,293705,319815,342207,344371,356426,365053,367631,409345,429469,489236]'><a href="http://www.mediafire.com/?rb04o0nc77t5b94" class="link" target="_blank">Loved Beatmap Pack (osu!) #1</a>
+        <span class='link'>2018-09-30 by Stefan</span></li><li data-item='[686264,718092,763672,765451,793041,799746,801028,801506,804604,808835,811230,816189,821050,824959,837929,839949,840920]'><a href="https://www.mediafire.com/?kfw2u6261wauv5x/" class="link" target="_blank">Beatmap Pack #689</a>
+        <span class='link'>2018-09-28 by Stefan</span></li><li data-item='[360325,670449,686264,708568,779047,784632,785235,786963,793588,799729,804233,804648,805167,828757,837842,838991,842412]'><a href="http://www.mediafire.com/?nh4dny58d2dayc5" class="link" target="_blank">Beatmap Pack #688</a>
+        <span class='link'>2018-09-21 by Stefan</span></li><li data-item='[416426,542163,706863,716592,749003,750370,754505,763777,797169,803854,805869,806020,807850,814797,822032,833463,839797]'><a href="http://www.mediafire.com/?hmy5c9ljoor1b2r" class="link" target="_blank">Beatmap Pack #687</a>
+        <span class='link'>2018-09-22 by Stefan</span></li><li data-item='[579130,604225,670872,716326,736862,745524,767434,782791,794419,799569,806350,813248,813773,818672,827168,830537,836819]'><a href="http://www.mediafire.com/?p7sstncfkv26a3d" class="link" target="_blank">Beatmap Pack #686</a>
+        <span class='link'>2018-09-09 by Stefan</span></li><li data-item='[587616,643153,653523,669437,725234,727333,742648,771036,775386,816211,816551,822997,825377,827743,831030,831236,834481]'><a href="http://www.mediafire.com/?rpujzqxptpbvn9o" class="link" target="_blank">Beatmap Pack #685</a>
+        <span class='link'>2018-09-09 by Stefan</span></li><li data-item='[34030,189476,604486,622109,724098,768390,777322,782778,790512,802930,807010,809788,812921,813890,814994,823272,828931]'><a href="http://www.mediafire.com/?l8rpycdiv1scv8w" class="link" target="_blank">Beatmap Pack #684</a>
+        <span class='link'>2018-08-31 by Stefan</span></li><li data-item='[228252,441523,486454,553237,663385,754401,775282,783955,792572,799084,799889,800526,806592,807310,809431,810642,817411]'><a href="http://www.mediafire.com/?m1il49myqkfmmwh" class="link" target="_blank">Beatmap Pack #683</a>
+        <span class='link'>2018-08-31 by Stefan</span></li><li data-item='[232518,660269,668378,669776,703666,713161,773330,786498,789822,795142,798302,805762,808764,811447,813036,817667,818778]'><a href="http://www.mediafire.com/?wvb3ris991bd165" class="link" target="_blank">Beatmap Pack #682</a>
+        <span class='link'>2018-08-31 by Stefan</span></li><li data-item='[183467,362752,607798,689715,734864,750166,750583,757350,773973,780833,786140,787129,787362,788905,799418,808310,815119]'><a href="http://www.mediafire.com/?tstwbos6hj137rr" class="link" target="_blank">Beatmap Pack #681</a>
+        <span class='link'>2018-08-19 by Stefan</span></li><li data-item='[789374,789528,789529,789544,789905,795432]'><a href="https://assets.ppy.sh/beatmap-packs/MG3-BeatmapPack.zip" class="link" target="_blank">Mappers' Guild Pack III</a>
+        <span class='link'>2018-08-13 by the Mappers' Guild</span></li><li data-item='[486177,491796,592381,662675,761598,772707,777733,787182,792241,796468,796544,800268,803842,810607,811434,814145,822391]'><a href="http://www.mediafire.com/?b1kqqinpg5k8x5k" class="link" target="_blank">Beatmap Pack #680</a>
+        <span class='link'>2018-08-13 by Stefan</span>
       </ul>
     </div>
     <!-- <script src="list.min.js"></script> -->
@@ -100,14 +230,12 @@
       const li = document.querySelectorAll('li')
       const a = [...document.querySelectorAll('li > a')].map(i => i.textContent)
       const input = document.querySelector('input')
-      // const a = new List('list', {
-      //   valueNames: ['link']
-      // })
+      input.addEventListener('blur', console.log)
       input.addEventListener('keyup', e => {
-        if (e.keyCode !== 13) return
+        if (e.key !== 'Enter') return
         let r
         try {
-          r = new RegExp(input.value)
+          r = new RegExp(input.value, 'i')
           input.classList.remove('error')
         } catch (e) {
           input.classList.add('error')
@@ -121,10 +249,21 @@
           }
         }
       })
-      input.addEventListener('blur', () => input.focus())
-      document.querySelector('#copy').addEventListener('click', () => {
+      document.querySelector('#copy').addEventListener('contextmenu', () => {
         let t = ''
         for (let i = 0; i < li.length; ++i) if (li[i].style.display !== 'none') t += li[i].firstElementChild.href + '\n'
+        copy(t)
+      })
+      document.querySelector('#copy').addEventListener('click', () => {
+        // https://osu.ppy.sh/beatmapsets/814038/download
+        let t = ''
+        for (let i = 0; i < li.length; ++i) {
+          if (li[i].style.display === 'none') continue
+          t +=
+            JSON.parse(li[i].dataset.item)
+              .map(i => `https://osu.ppy.sh/beatmapsets/${i}/download`)
+              .join('\n') + '\n'
+        }
         copy(t)
       })
     </script>
