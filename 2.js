@@ -15,4 +15,4 @@ c = c.replace(/<ul>[\s\S]*<\/ul>/m, b)
 let d = new Date().toISOString().slice(0, 10)
 d = '<span class="message">update on ' + d + '</span>'
 c = c.replace(/<span class="message">.*<\/span>/, d)
-fs.writeFileSync('index.html', c)
+fs.writeFileSync('docs/index.html', c)
